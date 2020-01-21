@@ -17,27 +17,29 @@ public class CashAdvanceServiceImpl implements CashAdvanceService{
 	
 	@Override
 	public Flux<CashAdvance> findAll() {
-		return null;
+		return repo.findAll();
 	}
 
 	@Override
 	public Mono<CashAdvance> findById(String id) {
-		return null;
+		return repo.findById(id);
 	}
 
 	@Override
 	public Mono<CashAdvance> save(CashAdvance cadvance) {
-		return null;
+		return repo.save(cadvance);
 	}
 
 	@Override
 	public Mono<CashAdvance> update(CashAdvance cadvance) {
-		return null;
+		return repo.findById(cadvance.getId())
+				.map(c -> cadvance)
+				.flatMap(repo::save);
 	}
 
 	@Override
 	public Mono<Void> delete(CashAdvance cadvance) {
-		return null;
+		return repo.delete(cadvance);
 	}
 
 }
