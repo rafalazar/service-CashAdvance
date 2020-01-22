@@ -25,9 +25,27 @@ public class CashAdvance {
 		
 	}
 	
-	public CashAdvance(String nameA,Double totalAvailable,Double amountAdvance) {
+	//Prueba 1 - (descomentar si la Prueba 2 NO funciona)
+	
+//	public CashAdvance(String nameA,Double totalAvailable,Double amountAdvance) {
+//		this.nameA = nameA;
+//		this.totalAvailable = totalAvailable;
+//		this.amountAdvance = amountAdvance;
+//		total();
+//	}
+	
+//	public void total() {
+//		this.totalAvailable = this.totalAvailable - this.amountAdvance;
+//		this.amountAdvance = 0.0;
+//	}
+	
+	//Prueba 2 ------
+	public CashAdvance(String nameA,Double totalAvailable) {
 		this.nameA = nameA;
 		this.totalAvailable = totalAvailable;
+	}
+	
+	public CashAdvance(Double amountAdvance) {
 		this.amountAdvance = amountAdvance;
 		total();
 	}
@@ -36,7 +54,5 @@ public class CashAdvance {
 		this.totalAvailable = this.totalAvailable - this.amountAdvance;
 		this.amountAdvance = 0.0;
 	}
-	
-	
 
 }

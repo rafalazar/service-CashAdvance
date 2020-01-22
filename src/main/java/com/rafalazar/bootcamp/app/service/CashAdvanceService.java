@@ -14,6 +14,8 @@ public interface CashAdvanceService {
 	
 	public Mono<CashAdvance> save(CashAdvance cadvance);
 	
+//	public Mono<CashAdvance> saveA(Object objeto);
+	
 	public Mono<CashAdvance> update(CashAdvance cadvance);
 	
 	public Mono<Void> delete(CashAdvance cadvance);
@@ -21,5 +23,9 @@ public interface CashAdvanceService {
 	public Mono<PersonalDto> createById(String id);
 	
 	public Flux<PersonalDto> findAllClients();
+	
+	// ---------------------------->>>>>>>>>>>
+	
+	public Mono<CashAdvance> amountAdvance(String id);
 
 }

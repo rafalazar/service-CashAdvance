@@ -57,4 +57,14 @@ public class CashAdvanceServiceImpl implements CashAdvanceService{
 		return client.findAllClients();
 	}
 
+	@Override
+	public Mono<CashAdvance> amountAdvance(String id) {
+		return repo.amountAdvance(id);
+	}
+
+//	@Override
+//	public Mono<CashAdvance> saveA(Object objeto) {
+//		return repo.saveA(objeto);
+//	}
+
 }

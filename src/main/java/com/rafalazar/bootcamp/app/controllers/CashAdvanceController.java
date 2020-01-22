@@ -62,20 +62,41 @@ public class CashAdvanceController {
 	Mono<CashAdvance> update(@PathVariable String id, @RequestBody CashAdvance cadvance) {
 		return service.update(cadvance);
 	}
+	
 	//-------Métodos compartidos------------//
+	
 	@GetMapping("/findAllClients")
 	Flux<PersonalDto> findAllClients(){
 		return service.findAllClients();
 	}
 	
 	@PostMapping("/createById/{id}")
-	Mono<CashAdvance> createById(@PathVariable("id") String id){
+	Mono<CashAdvance> createById(@PathVariable("id") String id, @RequestBody CashAdvance ca){
 		
+		/*El método createById devuelve un PersonalDto
+		lo busca por el id y luego con el .flatMap
+		lo guardamos en la variable c, accedemos a sus datos
+		con c.getName().
+		Finalmente lo guardamos como CashAdvance con los datos
+		obtenidos.
+		*/
 		return service.createById(id).flatMap(c -> {
 			return service.save(
-					new CashAdvance(c.getName(),3000.0,450.0)
+					//Creamos un objeto CashAdvance y le pasamos el total via RequestBody.
+					new CashAdvance(c.getName(),ca.getTotalAvailable())//Otra opción es pasarlo en duro.
 					);
 			
+		});
+	}
+	
+	//--------------Métodos propios----------------------//
+	
+	//@RequestBody es lo que pasaremos por el cuerpo.
+	@PostMapping("/adelantarSueldo/{id}")
+	Mono<CashAdvance> amountAdvance(@PathVariable("id") String id, @RequestBody CashAdvance ca){
+		return service.findById(id).flatMap(c -> {//FlatMap obtiene el objeto CashAdavance mediante el id.
+			c.setTotalAvailable(c.getTotalAvailable() - ca.getAmountAdvance());
+			return service.save(c);
 		});
 	}
 
