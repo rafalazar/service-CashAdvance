@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -14,6 +16,7 @@ public class CashAdvance {
 	@Id
 	private String id;
 	private String nameA;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dateM;
 	private Double totalAvailable;
 	private Double amountAdvance;
@@ -22,17 +25,18 @@ public class CashAdvance {
 		
 	}
 	
-	public CashAdvance(String nameA,Double totalAvailable) {
+	public CashAdvance(String nameA,Double totalAvailable,Double amountAdvance) {
 		this.nameA = nameA;
 		this.totalAvailable = totalAvailable;
-	}
-	
-	//Restamos lo solicitado a la cantidad existente.
-	
-	public CashAdvance(Double amountAdvance) {
 		this.amountAdvance = amountAdvance;
-		totalAvailable = totalAvailable - amountAdvance;
+		total();
 	}
+	
+	public void total() {
+		this.totalAvailable = this.totalAvailable - this.amountAdvance;
+		this.amountAdvance = 0.0;
+	}
+	
 	
 
 }
